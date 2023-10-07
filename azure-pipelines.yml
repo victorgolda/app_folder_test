@@ -30,12 +30,14 @@ steps:
       npm run build
   displayName: 'npm run build'
 
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    SourceFolder: './.next'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/.next'
-  displayName: 'Copy Files'
+    rootFolderOrFile: './.next'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/next.zip'
+    replaceExistingArchive: true
+ 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'

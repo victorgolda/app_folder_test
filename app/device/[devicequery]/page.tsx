@@ -13,8 +13,18 @@ async function getData() {
   return res.json()
 }
 
-export default async function Device() {
+export default async function Device({
+  params
+}: {
+  params: { devicequery: string }
+}) {
   const data = await getData()
+  const { devicequery } = params
   console.log(data)
-  return <h1>{data.title}</h1>
+  return (
+    <>
+      <h1>{data.title}</h1>
+      <h2>{devicequery}</h2>
+    </>
+  )
 }

@@ -30,6 +30,9 @@ steps:
       npm run build
   displayName: 'npm run build'
 
+- task: CmdLine@2
+  inputs:
+    script: 'dir'
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'

@@ -38,12 +38,17 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: 'ecosystem.config.js'
     TargetFolder: './.next'
-
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/public'
     Contents: '**'
     TargetFolder: './.next/standalone/public'
+    flattenFolders: true
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: './.next/static'
+    Contents: '**'
+    TargetFolder: './.next/standalone/.next/static'
     flattenFolders: true
 - task: ArchiveFiles@2
   inputs:

@@ -32,9 +32,9 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: './out'
+    SourceFolder: './.next'
     Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/out'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/.next'
   displayName: 'Copy Files'
 - task: PowerShell@2
   inputs:

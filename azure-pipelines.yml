@@ -1,0 +1,62 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - develop
+  - main
+pr:
+  branches:
+    exclude:
+      - '*'
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildName: 'networkInventory-dashboard'
+  buildCommitMessage:  $[replace(variables['build.sourceversionmessage'], '''', '')] 
+
+steps:
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+- script: |
+    npm install
+  displayName: 'npm install'
+- script: |
+      npm run build
+  displayName: 'npm run build'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: './out'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/out'
+  displayName: 'Copy Files'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+        # Write your PowerShell commands here.
+        new-item -itemtype file -path $(Build.ArtifactStagingDirectory) -name "buildinfo.json" -force -value '{
+        "buildName":"$(buildName)",
+        "buildSourceVersionMessage":"$(buildCommitMessage)",
+        "buildNumber":"$(Build.BuildNumber)",
+        "buildId":"$(Build.BuildId)",
+        "branchName":"$(Build.SourceBranchName)",
+        "commitHash":"$(Build.SourceVersion)"
+        }'
+  displayName: 'Enviornment Variables file'   
+
+- publish: $(Build.ArtifactStagingDirectory)/buildinfo.json
+  artifact: build
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'Publish'
+  condition: succeededOrFailed()

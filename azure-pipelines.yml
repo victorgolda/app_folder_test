@@ -38,6 +38,12 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: 'ecosystem.config.js'
     TargetFolder: './.next'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: 'public'
+    TargetFolder: './.next/public'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: './.next'

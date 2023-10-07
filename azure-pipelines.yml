@@ -42,8 +42,8 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: 'public'
-    TargetFolder: './.next/public'
+    Contents: './public'
+    TargetFolder: './.next/standalone/public'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: './.next'

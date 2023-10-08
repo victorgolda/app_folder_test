@@ -3,11 +3,11 @@ import MenuDrawer from '@/components/shared/MenuDrawer'
 import '@/styles/globals.css'
 import '@/styles/googleMaps.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+//import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 import { Providers } from './providers'
 
-const inter = Inter({ subsets: ['latin'] })
+//const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body>
         <Providers>
           <div className='grid grid-cols-12 h-screen'>
             <Toaster position='top-right' />

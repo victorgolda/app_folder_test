@@ -9,14 +9,14 @@ type Props = {
   deviceGeoLocation: MarkerGeolocation
   deviceName: string
 }
-
+const libraries = ['geometry', 'maps'] as any
 const DeviceMap = ({ deviceGeoLocation, deviceName }: Props) => {
   const makerLocation = {
     id: deviceName,
     name: deviceName,
     geoLocation: deviceGeoLocation
   }
-  const libraries = ['geometry', 'maps'] as any
+
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '',
@@ -59,8 +59,6 @@ const DeviceMap = ({ deviceGeoLocation, deviceName }: Props) => {
         onUnmount={onUnmount}
       >
         <MapMarkersPreview points={[makerLocation]} />
-        {/* <MapMarkers /> */}
-        <></>
       </GoogleMap>
     </div>
   ) : (

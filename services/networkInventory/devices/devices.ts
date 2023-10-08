@@ -7,8 +7,8 @@ import {
   clientNetworkInventoryAxios,
   serverNetworkInventoryAxios
 } from '@/utils/axios/axios'
-import { networkInventoryUrls } from 'services/urls'
-import { networkInventoryFetchInstance } from '@/utils/fetch/fetch'
+import { networkInventoryUrls } from '@/services/urls'
+//import { networkInventoryFetchInstance } from '@/utils/fetch/fetch'
 
 export const getDeviceService = async ({ query, fields }: GetDevice) => {
   const { data: device } = await clientNetworkInventoryAxios.get('device', {

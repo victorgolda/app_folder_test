@@ -50,7 +50,7 @@ import {
   clientNetworkInventoryAxios,
   serverNetworkInventoryAxios
 } from '@/utils/axios/axios'
-import { networkInventoryUrls } from 'services/urls'
+import { networkInventoryUrls } from '@/services/urls'
 
 export const getDeviceTypesService = async ({
   query,
